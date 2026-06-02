@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+    // Zidi had l-line hna bach i-bqa i-gérer l-langue f ga3 les pages automatically
     $middleware->web(append: [
         \App\Http\Middleware\SetLocale::class,
     ]);
-    })
+})
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

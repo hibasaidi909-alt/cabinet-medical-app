@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ServiceFactory extends Factory
 {
-    // زِد هاد السطر هنا للتأكيد على الربط
+    
     protected $model = Service::class; 
 
     public function definition(): array

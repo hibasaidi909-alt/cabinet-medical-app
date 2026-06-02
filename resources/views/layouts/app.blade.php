@@ -19,14 +19,13 @@
                 <div class="h-9 w-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md shadow-blue-200">M</div>
                 <span class="font-bold text-xl tracking-tight text-slate-900">MediConnect</span>
             </div>
-            <nav class="space-y-1">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-600 font-medium rounded-xl transition-all">
-                    <span>📅</span> {{ __('Dashboard') }}
-                </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium rounded-xl transition-all">
-                    <span>👥</span> {{ __('Patients') }}
-                </a>
-            </nav>
+            <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-600' }} flex items-center gap-3 p-3 rounded-xl transition-all">
+    <span>📊{{ __('messages.dashboard') }}</span>
+</a>
+
+<a href="{{ route('appointments.index') }}" class="{{ request()->routeIs('appointments.index') ? 'bg-blue-50 text-blue-600 font-semibold' : 'text-slate-600' }} flex items-center gap-3 p-3 rounded-xl transition-all">
+    <span>📅 {{ __('messages.appointments') }}</span>
+</a>
         </div>
         <!-- Lang Switcher inside Sidebar Footer -->
         <div class="p-6 border-t border-slate-100 flex gap-2">

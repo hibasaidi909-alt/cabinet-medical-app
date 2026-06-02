@@ -1,34 +1,20 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
+use Illuminate\Support\Facades\App;
 
+// 1. Route principale '/' kat-kheddem automatique l-dashboard
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', [AppointmentController::class, 'dashboard'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+//  1. Page Dashboard (Graphiques)
+Route::get('/dashboard', [AppointmentController::class, 'dashboard'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-Route::get('lang/{locale}', function ($locale) {
-    if (in_array($locale, ['fr', 'ar'])) {session()->put('locale', $locale);
-    }
-    return redirect()->back();
-})->name('lang.switch');
-require __DIR__.'/auth.php';
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('appointments', AppointmentController::class);
-});
-Route::middleware(['auth', 'verified'])->group(function () {
-    // الـ Route ديال البحث الديناميكي
-    Route::get('appointments/search', [AppointmentController::class, 'search'])->name('appointments.search');
-    
-    Route::resource('appointments', AppointmentController::class);
-});
+//  2. Page Rendez-vous / Patients (Ha l-tableau dyalk jani hna)
+Route::get('/appointments-list', [AppointmentController::class, 'index'])->name('appointments.index');
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::put('/appointments/{id}', [AppointmentController::class, 'update'])->name('appointments.update');
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+Route::get('/appointments/search', [AppointmentController::class, 'search']);
